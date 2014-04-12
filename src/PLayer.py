@@ -1,5 +1,6 @@
 __author__ = 'Julien'
 
+import random
 #F#
 class Player:
 
