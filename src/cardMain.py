@@ -1,4 +1,4 @@
-__author__ = 'Julien Leseine'
+__author__ = 'Alexandre Fayette/Julien Leseine/Mathieu Pequin'
 
 import random
 
