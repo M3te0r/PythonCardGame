@@ -13,6 +13,7 @@ class Card:
     cost = 0
 
     #A#
+    
     def __init__(self, _name, _health, _attack, _cost):
         self.name = _name
         self.health = _health
