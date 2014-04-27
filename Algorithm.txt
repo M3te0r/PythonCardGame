@@ -1,0 +1,66 @@
+Player 1 init(Player)
+init(player2)
+
+
+//Déroulement de la partie
+TANT QUE (Player1.health > 0 AND Player2.Health > 0){
+    Player1.Turn()
+    SI (Player2.health > 0){
+        Player2.Turn()
+    }
+}
+
+//Méthode de Turn()
+    Afficher message de début de tour
+    Afficher Field adversaire
+    Afficher Field de Player actuel
+    SET use = TRUE pour tous les monstres sur le field du player actuel (désactivation du repos d'invocation)
+    Piocher une carte dans le deck
+    Restauration du mana + augmentation de 1a limite (max 10)
+    Invocation des serviteurs (+contrôle type saisie, vérifier int, ou caractère de fin de phase)
+    Phase d'attaque
+        TANT QUE SAISIE != "end"{
+            Afficher Field actuel
+            Afficher Field adverse
+                TANT QUE SAISIE INVALIDE{
+                    Entrer carte avec laquelle attaquer ou "end" (déclencher série contrôles, saisie comme possibilité)
+                }
+                SI SAISIE != "end"{
+                    TANT QUE SAISIE2 INVALIDE{
+                        Entre la carte adverse à  attaquer ou player (déclencher série contrôles)
+                    }
+                    Déclencher combat sur SAISIE2
+                    Désactiver camouflage
+                    SI SAISIE2 == Carte{
+                        Afficher Morts Player2
+                        Afficher Morts Player actuel
+                        Nettoyer Field des morts
+                    }
+                    SINON{
+                        ATTAQUER JOUEUR
+                        Afficher PV perdus
+                    }
+                }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

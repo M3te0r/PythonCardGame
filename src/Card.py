@@ -3,7 +3,7 @@ __author__ = 'Alexandre Fayette/Julien Leseine/Mathieu Pequin'
 
 class Card:
     #Fonction d'initialisation#
-    def __init__(self, name, health, attack, cost, shield, hidden, taunt):
+    def __init__(self, name, health, attack, cost, shield, hidden, taunt, use):
         self.name = name
         self.health = health
         self.attack = attack
@@ -11,6 +11,13 @@ class Card:
         self.shield = shield
         self.hidden = hidden
         self.taunt = taunt
+        self.use = use
+
+    #Redéfinition de la fonction d'égalité " == " (pas identité) #
+    def __eq__(self, other):
+         return (self.name == other.name and self.health == other.health and self.attack == other.attack and
+                self.cost == other.cost and self.shield == other.shield and self.hidden == other.hidden and
+                self.taunt == other.taunt)
 
     ######################  GETTERS ##################
     def get_name(self):
@@ -94,6 +101,9 @@ class Card:
               " (", self.attack, "|", self.health, ")")
         card.take_damage(self.attack)
         self.take_damage(card.attack)
+
+    def can_attack(self):
+        return self.use
 
     def fight_attempt(self, ennemy_field, card):
         attackable = True

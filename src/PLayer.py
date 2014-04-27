@@ -5,12 +5,6 @@ import random
 
 class Player:
 
-    #variables
-    health = 30
-    mana = 1
-    hand = []
-    field = []
-
     def __init__(self, deck):
         self.health = 30
         self.attack = 1
