@@ -65,7 +65,7 @@ class Card:
 
     ##################### OTHERS #################
 
-    def print(self, display_mana=True):
+    def print_card(self, display_mana=True):
         if self.shield != 0:
             shield = "S:" + str(self.shield)
         else:
@@ -120,35 +120,3 @@ class Card:
         else:
             return False
 
-    #D#
-    def is_alive(self):
-        if self.health <= 0:
-            return True
-
-        else:
-            return False
-
-    #E#
-    def load_card_set(filename):
-        """
-        :param filename: nom du fichier
-        :type filename: str
-        """
-        #name attack health mana
-        myfic = open(filename, "r", 1)
-        deck = []
-        tmp = {}
-        i = 0
-        for line in myfic:
-            word = line.partition(" ")
-            tmp[0] = word[0]
-            word = word[2].partition(" ")
-            tmp[1] = word[0]
-            word = word[2].partition(" ")
-            tmp[2] = word[0]
-            word = word[2].partition(" ")
-            tmp[3] = word[0].split('\n')[0]
-            deck.append(Card(tmp[0], tmp[2], tmp[1], tmp[3]))
-            i += 1
-        myfic.close()
-        return deck

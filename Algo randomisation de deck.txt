@@ -1,0 +1,18 @@
+pile[] cartes décrites dans le fichier chargées dans un tableau d'objets Card
+deck[] deck final, avec cartes mélangées
+
+save = pile.length sert à conserver la taille initiale de la pile, assure de transférer toutes les cartes au deck
+j = pile.length évitera lees débordements d'indice du random
+
+i=0 indice de remplissage du deck
+tmp_idx index aléatoire pour prendre une carte de la pile
+
+TANT QUE i < save
+    tmp_idx = random(entre 0 et j)
+    deck.append(pile[tmp_idx])
+    pile.remove(tmp_idx)
+    j--
+    i++
+fTQ
+
+
