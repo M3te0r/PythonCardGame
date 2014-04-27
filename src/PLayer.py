@@ -1,7 +1,8 @@
-__author__ = 'Julien'
+__author__ = 'Alexandre Fayette/Julien Leseine/Mathieu Pequin'
 
 import random
-#F#
+
+
 class Player:
 
     #variables
@@ -24,7 +25,7 @@ class Player:
     def deploy(self):
         print("Choisissez une carte a deployer")
         for i in self.hand:
-            print(self.hand[i].name , " ", i)
+            print(self.hand[i].name, " ", i)
             reponse = input("entrez le numero de la carte:")
             if reponse.isnumeric():
                 self.field.append(self.hand[reponse])
@@ -42,10 +43,6 @@ class Player:
         else:
             return True
 
-
     #K#
     def setMana(self, value):
-        self.mana = va#
-
-    #L#
-    def playTurn(self, player1, player2):
+        self.mana = value
