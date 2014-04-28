@@ -8,8 +8,17 @@ import time
 copie = []
 player1 = Player("Alexandre")
 player1.load_card_set("decks/deck1.txt")
-del player1.deck[0]
-for element in player1.deck:
-    print(element.name)
-print(player1.deck[0].name)
-print(player1.deck[4])
+
+word = "kaka|lol"
+word = word.split("|")[0]
+print(word)
+
+
+print(player1.deck[1].name)
+print(player1.deck[1].attack)
+print(player1.deck[1].health)
+print(player1.deck[1].cost)
+print(player1.deck[1].shield)
+print(player1.deck[1].hidden)
+print(player1.deck[1].taunt)
+print(player1.deck[1].use)
