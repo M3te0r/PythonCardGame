@@ -32,7 +32,7 @@ class Player:
 
     #Fonction de message de début de tour#
     def turn_message(self):
-        print("C'est à votre tour, ", self.name, " ! Il vous reste ", self.health)
+        print("C'est à votre tour, ", self.name, " ! Il vous reste ", self.health, " PV")
 
     #Retirer le repos d'invocation pour tous les monstres présents (à faire avant les invocations)#
     def wake_cards(self):
@@ -88,7 +88,7 @@ class Player:
             target = ""
             if (saisie.isnumeric() and len(self.field) >= int(saisie) >= 0) or (saisie == "end"):
                 if saisie.isnumeric():
-                    while (saisie.isnumeric() and len(self.field) >= int(saisie) >= 0 and self.field[int(saisie)-1].use == 0) == False and (saisie == "end") == False:
+                    while (saisie.isnumeric() and len(self.field) >= int(saisie) >= 0 and int(saisie) != 0 and self.field[int(saisie)-1].use == 0) == False and (saisie == "end") == False:
                         saisie = input("Ce serviteur est en repos ou déjà utilisé, choisissez-en un autre")
                     if saisie.isnumeric():
                         choice = int(saisie)

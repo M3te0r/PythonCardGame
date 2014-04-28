@@ -53,6 +53,7 @@ class Card:
 
     def fight_card(self, card):
         self.hidden = 0
+        self.use = 0
         print("Vous attaquez ", card.get_name(), " (", card.get_attack(), "|", card.get_health(), ") avec ", self.name,
               " (", self.attack, "|", self.health, ")")
         card.take_damage(self.attack)
@@ -66,6 +67,7 @@ class Card:
                 if (element.taunt == 1):
                     print("Impossible d'attaquer le joueur, ", element.name, " a la capacité de provocation")
                     return False
+            self.use = 0
             print("Vous infligez ", self.attack, " à ", player2.name)
             player2.take_damage(self)
             return True
