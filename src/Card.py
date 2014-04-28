@@ -59,25 +59,26 @@ class Card:
         self.take_damage(card.attack)
 
     def fight_attempt(self, player2, idx):
-        if idx.isnumeric() == False:
+        if not idx.isnumeric():
             return False
-        if idx == 0:
+        if int(idx) == 0:
             for element in player2.field:
                 if (element.taunt == 1):
                     print("Impossible d'attaquer le joueur, ", element.name, " a la capacité de provocation")
                     return False
-                player2.take_damage(self)
-                return True
+            print("Vous infligez ", self.attack, " à ", player2.name)
+            player2.take_damage(self)
+            return True
         attackable = True
         for element in player2.field:
-            if (element.taunt == 1) and (element != player2.field[idx-1]):
+            if (element.taunt == 1) and (element != player2.field[int(idx)-1]):
                 attackable = False
                 print("Vous ne pouvez pas attaquer cette carte, car ", element.name, " a la capacité de provocation !")
-        if player2.field[idx-1].hidden == 1:
+        if player2.field[int(idx)-1].hidden == 1:
             attackable = False
             print("Ce monstre est camouflé, vous ne pouvez pas l'attaquer !")
         if attackable:
-            self.fight_card(player2.field[idx-1])
+            self.fight_card(player2.field[int(idx)-1])
             return True
         else:
             return False

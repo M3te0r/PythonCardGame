@@ -32,7 +32,7 @@ class Player:
 
     #Fonction de message de début de tour#
     def turn_message(self):
-        print("C'est à votre tour, ", self.name, " !")
+        print("C'est à votre tour, ", self.name, " ! Il vous reste ", self.health)
 
     #Retirer le repos d'invocation pour tous les monstres présents (à faire avant les invocations)#
     def wake_cards(self):
@@ -61,8 +61,9 @@ class Player:
             if saisie.isnumeric():
                 saisie = int(saisie)
                 if self.mana >= self.hand[saisie-1].cost:
+                    self.mana -= self.hand[saisie-1].cost
                     self.field.append(self.hand[saisie-1])
-                    print("Vous avez posé ", self.hand[saisie-1])
+                    print("Vous avez posé ", self.hand[saisie-1].name)
                     del self.hand[saisie-1]
                 else:
                     print("Pas assez de mana pour innvoquer cette carte")
@@ -76,16 +77,18 @@ class Player:
             print ("-(0) ", player2.name)
             i = 0
             for element in player2.field:
-                    print("-(",i,") ", element.print_card)
+                    print("-(",i,")", end=" ")
+                    element.print_card(False)
             print("Voici vos cartes sur le terrain :")
-            i = 0
+            i = 1
             for element in self.field:
-                print("-(",i,") ", element.print_card)
+                print("-(",i,")", end= " ")
+                element.print_card(False)
             saisie = input("Saisissez le numero du serviteur que vous voulez utiliser, ou \"end\" pour passer")
             target = ""
-            if (saisie.isnumeric() and len(self.field) >= saisie > 0) or (saisie == "end"):
+            if (saisie.isnumeric() and len(self.field) >= int(saisie) >= 0) or (saisie == "end"):
                 if saisie.isnumeric():
-                    while (saisie.isnumeric() and len(self.field) >= saisie > 0 and self.field[int(saisie)-1].use == 0) == False and (saisie == "end") == False:
+                    while (saisie.isnumeric() and len(self.field) >= int(saisie) >= 0 and self.field[int(saisie)-1].use == 0) == False and (saisie == "end") == False:
                         saisie = input("Ce serviteur est en repos ou déjà utilisé, choisissez-en un autre")
                     if saisie.isnumeric():
                         choice = int(saisie)
