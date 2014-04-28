@@ -5,25 +5,24 @@ from src.Card import Card
 from src.PLayer import Player
 import time
 
-copie = []
-player1 = Player("Alexandre")
+print("Bienvenue ! Entrez vos noms !")
+name1 = input("Joueur 1 ?")
+name2 = input("Joueur 2 ?")
+
+player1 = Player(name1)
+player2 = Player(name2)
 player1.load_card_set("decks/deck1.txt")
-
-word = "kaka|lol"
-word = word.split("|")[0]
-print(word)
-
-while len(player1.deck) > 0:
-    del player1.deck[0]
+player2.load_card_set("decks/deck1.txt")
 
 for element in player1.deck:
     element.print_card()
 
-print(player1.deck[1].name)
-print(player1.deck[1].attack)
-print(player1.deck[1].health)
-print(player1.deck[1].cost)
-print(player1.deck[1].shield)
-print(player1.deck[1].hidden)
-print(player1.deck[1].taunt)
-print(player1.deck[1].use)
+while player1.health > 0 and player2.health > 0:
+    player1.player_turn(player2)
+    if player2.health > 0 :
+        player2.player_turn(player1)
+if player1.health <= 0:
+    print(player2.name," gagne !")
+else:
+    print(player1.name," gagne !")
+

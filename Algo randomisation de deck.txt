@@ -7,12 +7,11 @@ j = pile.length évitera lees débordements d'indice du random
 i=0 indice de remplissage du deck
 tmp_idx index aléatoire pour prendre une carte de la pile
 
-TANT QUE i < save
+TANT QUE j >= 0
     tmp_idx = random(entre 0 et j)
     deck.append(pile[tmp_idx])
     pile.remove(tmp_idx)
     j--
-    i++
 fTQ
 
 

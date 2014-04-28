@@ -4,7 +4,7 @@ from src import *
 
 class Card:
     #Fonction d'initialisation#
-    def __init__(self, name, health, attack, cost, shield, hidden, taunt, use):
+    def __init__(self, name, attack, health, cost, shield, hidden, taunt, use):
         self.name = name
         self.attack = attack
         self.health = health
@@ -59,6 +59,8 @@ class Card:
         self.take_damage(card.attack)
 
     def fight_attempt(self, player2, idx):
+        if idx.isnumeric() == False:
+            return False
         if idx == 0:
             for element in player2.field:
                 if (element.taunt == 1):

@@ -26,7 +26,7 @@ class Player:
             while len(self.cemetery) > 0:
                 self.deck.append(self.cemetery[0])
                 del self.cemetery[0]
-        print("Vous avez pioché : ", self.deck[0].print_card())
+        print("Vous avez pioché : ", self.deck[0].name)
         self.hand.append(self.deck[0])
         del self.deck[0]
 
@@ -56,11 +56,11 @@ class Player:
                 element.print_card()
                 i += 1
             saisie = input("Saisissez le numero du serviteur que vous desirez invoquer, ou \"end\" pour passer")
-            while self.check_input() == False:
+            while self.check_input(saisie) == False:
                 saisie = input("Mauvaise saisie, veuillez recommencer")
             if saisie.isnumeric():
                 saisie = int(saisie)
-                if self.mana >= self.hand[saisie-1]:
+                if self.mana >= self.hand[saisie-1].cost:
                     self.field.append(self.hand[saisie-1])
                     print("Vous avez posé ", self.hand[saisie-1])
                     del self.hand[saisie-1]
@@ -82,11 +82,18 @@ class Player:
             for element in self.field:
                 print("-(",i,") ", element.print_card)
             saisie = input("Saisissez le numero du serviteur que vous voulez utiliser, ou \"end\" pour passer")
-            if (saisie.isnumeric() and len(self.field) >= saisie >= 0) or (saisie == "end"):
+            target = ""
+            if (saisie.isnumeric() and len(self.field) >= saisie > 0) or (saisie == "end"):
                 if saisie.isnumeric():
-
-
-
+                    while (saisie.isnumeric() and len(self.field) >= saisie > 0 and self.field[int(saisie)-1].use == 0) == False and (saisie == "end") == False:
+                        saisie = input("Ce serviteur est en repos ou déjà utilisé, choisissez-en un autre")
+                    if saisie.isnumeric():
+                        choice = int(saisie)
+                        saisie = ""
+                        while self.field[choice-1].fight_attempt(player2, saisie) == False:
+                            saisie = input("Entrez le numéro de la cible")
+            else:
+                print("Mauvaise saisie")
 
 
 
@@ -97,7 +104,7 @@ class Player:
         :type saisie: str
         """
         if saisie.isnumeric():
-            if len(self.hand) >= saisie >= 1:
+            if len(self.hand) >= int(saisie) >= 1:
                 return True
             else:
                 return False
@@ -107,14 +114,40 @@ class Player:
             else:
                 return False
 
-    def deploy(self):
-        print("Choisissez une carte a deployer")
-        for i in self.hand:
-            print(self.hand[i].name, " ", i)
-            reponse = input("entrez le numero de la carte:")
-            if reponse.isnumeric():
-                self.field.append(self.hand[reponse])
-                self.hand.remove(reponse)
+    #fonction d'affichage des morts et clean du field#
+    def clean_after(self):
+        print("Morts ", self.name, " : ")
+        for element in self.field:
+            if element.health == 0:
+                print("-",element.name)
+        i = 0
+        while i < len(self.field):
+            if self.deck[i].health == 0:
+                self.cemetery.append(self.deck[i])
+                del self.deck[i]
+                while self.deck[i].health == 0:
+                    self.cemetery.append(self.deck[i])
+                    del self.deck[i]
+            i += 1
+
+    #Fonction de tour complet#
+    def player_turn(self, player2):
+        self.turn_message()
+        print("Terrain adverse : ")
+        print("------------------------------------------------")
+        for element in player2.field:
+            element.print_card(False)
+        print("------------------------------------------------")
+        print("Votre terrain")
+        for element in self.field:
+            element.print_card(False)
+        print("------------------------------------------------")
+        self.wake_cards()
+        self.pickUp()
+        self.initiate_mana()
+        self.invoke_cards()
+        self.attack_phase(player2)
+        self.clean_after()
 
     def load_card_set(self, filename):
         """
@@ -131,7 +164,6 @@ class Player:
                 tmp[i] = word[0]
                 word = word[2].partition("|")
                 i += 1
-            print(word)
             tmp[i] = word[0].split('\n')[0]
-            self.deck.append(Card(tmp[0], tmp[2], tmp[1], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7]))
+            self.deck.append(Card(tmp[0], int(tmp[1]), int(tmp[2]), int(tmp[3]), int(tmp[4]), int(tmp[5]), int(tmp[6]), int(tmp[7])))
         myfic.close()
