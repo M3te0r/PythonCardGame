@@ -13,6 +13,11 @@ word = "kaka|lol"
 word = word.split("|")[0]
 print(word)
 
+while len(player1.deck) > 0:
+    del player1.deck[0]
+
+for element in player1.deck:
+    element.print_card()
 
 print(player1.deck[1].name)
 print(player1.deck[1].attack)

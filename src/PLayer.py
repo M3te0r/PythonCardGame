@@ -16,6 +16,10 @@ class Player:
         self.deck = []
         self.cemetery = []
 
+    #fonction de prise de dégâts#
+    def take_damage(self, card):
+        self.health -= card.attack
+
     #Fonction de pioche avec remplissage du deck à partir du cimetière si vide#
     def pickUp(self):
         if len(self.deck) == 0:
@@ -80,6 +84,7 @@ class Player:
             saisie = input("Saisissez le numero du serviteur que vous voulez utiliser, ou \"end\" pour passer")
             if (saisie.isnumeric() and len(self.field) >= saisie >= 0) or (saisie == "end"):
                 if saisie.isnumeric():
+
 
 
 
